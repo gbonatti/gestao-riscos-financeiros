@@ -11,12 +11,17 @@ Conteudo:
   - Graficos de distribuicao de retornos e comparacao de metodos
 """
 
+import os
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from scipy.stats import norm, t as t_dist
 from scipy.stats import chi2
 
+
+# Diretorio de saida dos graficos
+FIGURAS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "figuras")
+os.makedirs(FIGURAS_DIR, exist_ok=True)
 
 # ---------------------------------------------------------------------------
 # 1. VaR PARAMETRICO
@@ -262,9 +267,9 @@ def grafico_distribuicao_retornos(retornos: np.ndarray, posicao: float,
     axes[1].grid(alpha=0.3)
 
     plt.tight_layout()
-    plt.savefig("grafico_var_retornos.png", dpi=120)
+    plt.savefig(os.path.join(FIGURAS_DIR, "grafico_var_retornos.png"), dpi=120)
     plt.show()
-    print("Grafico salvo como 'grafico_var_retornos.png'")
+    print(f"Grafico salvo em: {os.path.join(FIGURAS_DIR, "grafico_var_retornos.png")}")
 
 
 def grafico_monte_carlo_var(mc_result: dict, posicao: float,
@@ -290,9 +295,9 @@ def grafico_monte_carlo_var(mc_result: dict, posicao: float,
     plt.legend()
     plt.grid(alpha=0.3)
     plt.tight_layout()
-    plt.savefig("grafico_monte_carlo.png", dpi=120)
+    plt.savefig(os.path.join(FIGURAS_DIR, "grafico_monte_carlo.png"), dpi=120)
     plt.show()
-    print("Grafico salvo como 'grafico_monte_carlo.png'")
+    print(f"Grafico salvo em: {os.path.join(FIGURAS_DIR, "grafico_monte_carlo.png")}")
 
 
 def grafico_backtesting(retornos: np.ndarray, posicao: float,
@@ -315,9 +320,9 @@ def grafico_backtesting(retornos: np.ndarray, posicao: float,
     ax.legend()
     ax.grid(alpha=0.3)
     plt.tight_layout()
-    plt.savefig("grafico_backtesting.png", dpi=120)
+    plt.savefig(os.path.join(FIGURAS_DIR, "grafico_backtesting.png"), dpi=120)
     plt.show()
-    print("Grafico salvo como 'grafico_backtesting.png'")
+    print(f"Grafico salvo em: {os.path.join(FIGURAS_DIR, "grafico_backtesting.png")}")
 
 
 # ---------------------------------------------------------------------------

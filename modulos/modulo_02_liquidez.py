@@ -10,11 +10,16 @@ Conteudo:
   - Graficos de projecao
 """
 
+import os
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 
+
+# Diretorio de saida dos graficos
+FIGURAS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "figuras")
+os.makedirs(FIGURAS_DIR, exist_ok=True)
 
 # ---------------------------------------------------------------------------
 # 1. LIQUIDITY COVERAGE RATIO (LCR)
@@ -225,9 +230,9 @@ def grafico_gap_liquidez(df_gap: pd.DataFrame) -> None:
     axes[1].grid(axis="y", alpha=0.3)
 
     plt.tight_layout()
-    plt.savefig("grafico_gap_liquidez.png", dpi=120)
+    plt.savefig(os.path.join(FIGURAS_DIR, "grafico_gap_liquidez.png"), dpi=120)
     plt.show()
-    print("Grafico salvo como 'grafico_gap_liquidez.png'")
+    print(f"Grafico salvo em: {os.path.join(FIGURAS_DIR, "grafico_gap_liquidez.png")}")
 
 
 def grafico_stress_test(df_stress: pd.DataFrame, lcr_base: float) -> None:
@@ -251,9 +256,9 @@ def grafico_stress_test(df_stress: pd.DataFrame, lcr_base: float) -> None:
     ax.set_xlabel("LCR (%)")
     ax.grid(axis="x", alpha=0.3)
     plt.tight_layout()
-    plt.savefig("grafico_stress_liquidez.png", dpi=120)
+    plt.savefig(os.path.join(FIGURAS_DIR, "grafico_stress_liquidez.png"), dpi=120)
     plt.show()
-    print("Grafico salvo como 'grafico_stress_liquidez.png'")
+    print(f"Grafico salvo em: {os.path.join(FIGURAS_DIR, "grafico_stress_liquidez.png")}")
 
 
 # ---------------------------------------------------------------------------

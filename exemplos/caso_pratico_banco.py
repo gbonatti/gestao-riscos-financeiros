@@ -53,6 +53,11 @@ from modulos.modulo_06_portfolio import (
 )
 
 
+# Diretorio de saida dos graficos
+FIGURAS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "figuras")
+os.makedirs(FIGURAS_DIR, exist_ok=True)
+
+
 # ===========================================================================
 # BALANCO DO BANCO BETAFINANCE S.A. (valores fictícios em R$ milhoes)
 # ===========================================================================
@@ -461,9 +466,9 @@ def gerar_dashboard(perda_juros: float, lcr_estresse: dict, var_10d: float):
             pctdistance=0.75)
     ax6.set_title("Composicao dos Ativos\nBanco BetaFinance S.A.", fontsize=10)
 
-    plt.savefig("dashboard_riscos_betafinance.png", dpi=130, bbox_inches="tight")
+    plt.savefig(os.path.join(FIGURAS_DIR, "dashboard_riscos_betafinance.png"), dpi=130, bbox_inches="tight")
     plt.show()
-    print("Dashboard salvo como 'dashboard_riscos_betafinance.png'")
+    print(f"Dashboard salvo em: {os.path.join(FIGURAS_DIR, "dashboard_riscos_betafinance.png")}")
 
 
 # ===========================================================================

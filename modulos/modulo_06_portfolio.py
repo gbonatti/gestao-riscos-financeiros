@@ -11,6 +11,7 @@ Conteudo:
   - Graficos da fronteira eficiente
 """
 
+import os
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -18,6 +19,10 @@ import matplotlib.cm as cm
 from scipy.optimize import minimize
 from scipy.stats import norm
 
+
+# Diretorio de saida dos graficos
+FIGURAS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "figuras")
+os.makedirs(FIGURAS_DIR, exist_ok=True)
 
 # ---------------------------------------------------------------------------
 # 1. DADOS FICTICIOS DE ATIVOS BRASILEIROS
@@ -306,9 +311,9 @@ def grafico_fronteira_eficiente(df_fronteira: pd.DataFrame,
     ax.legend(fontsize=8, loc="upper left")
     ax.grid(alpha=0.3)
     plt.tight_layout()
-    plt.savefig("grafico_fronteira_eficiente.png", dpi=130)
+    plt.savefig(os.path.join(FIGURAS_DIR, "grafico_fronteira_eficiente.png"), dpi=130)
     plt.show()
-    print("Grafico salvo como 'grafico_fronteira_eficiente.png'")
+    print(f"Grafico salvo em: {os.path.join(FIGURAS_DIR, "grafico_fronteira_eficiente.png")}")
 
 
 def grafico_composicao_carteira(nomes: list, cart_min_var: dict,
@@ -335,9 +340,9 @@ def grafico_composicao_carteira(nomes: list, cart_min_var: dict,
                      f"Risco={cart['risco']*100:.1f}%", fontsize=11)
 
     plt.tight_layout()
-    plt.savefig("grafico_composicao_carteiras.png", dpi=120)
+    plt.savefig(os.path.join(FIGURAS_DIR, "grafico_composicao_carteiras.png"), dpi=120)
     plt.show()
-    print("Grafico salvo como 'grafico_composicao_carteiras.png'")
+    print(f"Grafico salvo em: {os.path.join(FIGURAS_DIR, "grafico_composicao_carteiras.png")}")
 
 
 def grafico_heatmap_correlacao(nomes: list, correlacoes: np.ndarray) -> None:
@@ -357,9 +362,9 @@ def grafico_heatmap_correlacao(nomes: list, correlacoes: np.ndarray) -> None:
                     fontsize=10)
     ax.set_title("Matriz de Correlacao entre Ativos", fontsize=13)
     plt.tight_layout()
-    plt.savefig("grafico_correlacao.png", dpi=120)
+    plt.savefig(os.path.join(FIGURAS_DIR, "grafico_correlacao.png"), dpi=120)
     plt.show()
-    print("Grafico salvo como 'grafico_correlacao.png'")
+    print(f"Grafico salvo em: {os.path.join(FIGURAS_DIR, "grafico_correlacao.png")}")
 
 
 # ---------------------------------------------------------------------------

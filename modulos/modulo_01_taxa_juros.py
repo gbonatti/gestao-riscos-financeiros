@@ -10,11 +10,16 @@ Conteudo:
   - Graficos de sensibilidade
 """
 
+import os
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from scipy.stats import norm
 
+
+# Diretorio de saida dos graficos
+FIGURAS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "figuras")
+os.makedirs(FIGURAS_DIR, exist_ok=True)
 
 # ---------------------------------------------------------------------------
 # 1. PRECIFICACAO DE TITULOS
@@ -198,9 +203,9 @@ def grafico_preco_yield(cupom_rate: float, face: float, n_periodos: int,
     plt.legend()
     plt.grid(alpha=0.3)
     plt.tight_layout()
-    plt.savefig("grafico_preco_yield.png", dpi=120)
+    plt.savefig(os.path.join(FIGURAS_DIR, "grafico_preco_yield.png"), dpi=120)
     plt.show()
-    print("Grafico salvo como 'grafico_preco_yield.png'")
+    print(f"Grafico salvo em: {os.path.join(FIGURAS_DIR, "grafico_preco_yield.png")}")
 
 
 def grafico_duration_vencimento(cupom_rate: float, face: float, yield_: float,
@@ -216,9 +221,9 @@ def grafico_duration_vencimento(cupom_rate: float, face: float, yield_: float,
     plt.ylabel("Duration (anos)")
     plt.grid(alpha=0.3)
     plt.tight_layout()
-    plt.savefig("grafico_duration.png", dpi=120)
+    plt.savefig(os.path.join(FIGURAS_DIR, "grafico_duration.png"), dpi=120)
     plt.show()
-    print("Grafico salvo como 'grafico_duration.png'")
+    print(f"Grafico salvo em: {os.path.join(FIGURAS_DIR, "grafico_duration.png")}")
 
 
 # ---------------------------------------------------------------------------

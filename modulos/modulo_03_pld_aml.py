@@ -10,6 +10,7 @@ Conteudo:
   - Graficos e relatorio de alertas
 """
 
+import os
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -23,6 +24,10 @@ from sklearn.preprocessing import StandardScaler
 import warnings
 warnings.filterwarnings("ignore")
 
+
+# Diretorio de saida dos graficos
+FIGURAS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "figuras")
+os.makedirs(FIGURAS_DIR, exist_ok=True)
 
 # ---------------------------------------------------------------------------
 # 1. KYC — SCORE DE RISCO DO CLIENTE
@@ -225,10 +230,10 @@ def gerar_dataset_transacoes(n_legitimas: int = 2000,
     risco_leg = rng.choice([0, 1], n_legitimas, p=[0.97, 0.03])
 
     # Transacoes suspeitas
-    val_sus  = rng.choice([
-        rng.uniform(8_000, 9_999, n_suspeitas // 2),    # smurfing
-        rng.lognormal(mean=11, sigma=0.8, size=n_suspeitas // 2),  # volumes altos
-    ]).flatten()[:n_suspeitas]
+    val_sus  = np.concatenate([
+        rng.uniform(8_000, 9_999, n_suspeitas // 2),           # smurfing
+        rng.lognormal(mean=11, sigma=0.8, size=n_suspeitas - n_suspeitas // 2),  # volumes altos
+    ])
     hor_sus  = rng.choice(list(range(0, 6)) + list(range(22, 24)), n_suspeitas)
     freq_sus = rng.integers(6, 20, n_suspeitas)
     z_sus    = rng.uniform(3, 8, n_suspeitas)
@@ -353,9 +358,9 @@ def grafico_distribuicao_valores(df: pd.DataFrame) -> None:
     axes[1].grid(alpha=0.3)
 
     plt.tight_layout()
-    plt.savefig("grafico_distribuicao_transacoes.png", dpi=120)
+    plt.savefig(os.path.join(FIGURAS_DIR, "grafico_distribuicao_transacoes.png"), dpi=120)
     plt.show()
-    print("Grafico salvo como 'grafico_distribuicao_transacoes.png'")
+    print(f"Grafico salvo em: {os.path.join(FIGURAS_DIR, "grafico_distribuicao_transacoes.png")}")
 
 
 def grafico_feature_importance(importancias: pd.Series) -> None:
@@ -369,9 +374,9 @@ def grafico_feature_importance(importancias: pd.Series) -> None:
     for i, v in enumerate(importancias):
         ax.text(v + 0.005, i, f"{v:.3f}", va="center", fontsize=9)
     plt.tight_layout()
-    plt.savefig("grafico_feature_importance.png", dpi=120)
+    plt.savefig(os.path.join(FIGURAS_DIR, "grafico_feature_importance.png"), dpi=120)
     plt.show()
-    print("Grafico salvo como 'grafico_feature_importance.png'")
+    print(f"Grafico salvo em: {os.path.join(FIGURAS_DIR, "grafico_feature_importance.png")}")
 
 
 def grafico_roc(resultado: dict) -> None:
@@ -387,9 +392,9 @@ def grafico_roc(resultado: dict) -> None:
     ax.legend()
     ax.grid(alpha=0.3)
     plt.tight_layout()
-    plt.savefig("grafico_roc_fraude.png", dpi=120)
+    plt.savefig(os.path.join(FIGURAS_DIR, "grafico_roc_fraude.png"), dpi=120)
     plt.show()
-    print("Grafico salvo como 'grafico_roc_fraude.png'")
+    print(f"Grafico salvo em: {os.path.join(FIGURAS_DIR, "grafico_roc_fraude.png")}")
 
 
 # ---------------------------------------------------------------------------

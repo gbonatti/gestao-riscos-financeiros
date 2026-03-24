@@ -11,12 +11,17 @@ Conteudo:
   - Graficos de simulacao de crescimento de capital
 """
 
+import os
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from scipy.stats import norm
 from scipy.optimize import brentq
 
+
+# Diretorio de saida dos graficos
+FIGURAS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "figuras")
+os.makedirs(FIGURAS_DIR, exist_ok=True)
 
 # ---------------------------------------------------------------------------
 # 1. VALOR DO DINHEIRO NO TEMPO
@@ -268,9 +273,9 @@ def grafico_juros_compostos(pv: float, taxa: float, n: int) -> None:
     plt.legend()
     plt.grid(alpha=0.3)
     plt.tight_layout()
-    plt.savefig("grafico_juros_compostos.png", dpi=120)
+    plt.savefig(os.path.join(FIGURAS_DIR, "grafico_juros_compostos.png"), dpi=120)
     plt.show()
-    print("Grafico salvo como 'grafico_juros_compostos.png'")
+    print(f"Grafico salvo em: {os.path.join(FIGURAS_DIR, "grafico_juros_compostos.png")}")
 
 
 def grafico_sml(rf: float, rm: float, ativos: list) -> None:
@@ -301,9 +306,9 @@ def grafico_sml(rf: float, rm: float, ativos: list) -> None:
     plt.legend()
     plt.grid(alpha=0.3)
     plt.tight_layout()
-    plt.savefig("grafico_sml.png", dpi=120)
+    plt.savefig(os.path.join(FIGURAS_DIR, "grafico_sml.png"), dpi=120)
     plt.show()
-    print("Grafico salvo como 'grafico_sml.png'")
+    print(f"Grafico salvo em: {os.path.join(FIGURAS_DIR, "grafico_sml.png")}")
 
 
 def grafico_black_scholes_superficie(S: float, K: float, r: float,
@@ -326,9 +331,9 @@ def grafico_black_scholes_superficie(S: float, K: float, r: float,
     ax.set_zlabel("Preco da Call (R$)")
     ax.set_title("Superficie Black-Scholes — Preco da Call", fontsize=12)
     plt.tight_layout()
-    plt.savefig("grafico_bs_superficie.png", dpi=120)
+    plt.savefig(os.path.join(FIGURAS_DIR, "grafico_bs_superficie.png"), dpi=120)
     plt.show()
-    print("Grafico salvo como 'grafico_bs_superficie.png'")
+    print(f"Grafico salvo em: {os.path.join(FIGURAS_DIR, "grafico_bs_superficie.png")}")
 
 
 # ---------------------------------------------------------------------------
