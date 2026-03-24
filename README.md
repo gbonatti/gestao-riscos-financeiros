@@ -161,4 +161,4 @@ Para a teoria completa de cada modulo com formulas, exemplos resolvidos e questo
 
 ---
 
-# Gilberto Ricardo Bonatti - Especialista Modelagem Numérica
+### Gilberto Ricardo Bonatti - Especialista Modelagem Numérica
