@@ -2,8 +2,6 @@
 
 Projeto educacional em Python cobrindo os principais topicos de gestao de riscos em instituicoes financeiras: risco de taxa de juros, risco de liquidez, prevencao a lavagem de dinheiro (PLD/AML), produtos financeiros, risco de mercado e gestao de portfolio.
 
-> Material baseado no curso **Gestao de Riscos** — estrutura inspirada em certificacoes CPA-20 / FRM.
-
 ---
 
 ## Modulos
@@ -163,6 +161,4 @@ Para a teoria completa de cada modulo com formulas, exemplos resolvidos e questo
 
 ---
 
-## Licenca
-
-MIT License — uso livre para fins educacionais.
+## Gilberto Ricardo Bonatti - Especialista Modelagem Numérica
